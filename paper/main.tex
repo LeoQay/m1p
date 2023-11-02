@@ -25,7 +25,7 @@
 	Cranberry-Lemon University\\
 	Pittsburgh, PA 15213 \\
 	\texttt{hippo@cs.cranberry-lemon.edu} \\
-	%% examples of more authors
+	%% examples of more authors\label{key}
 	\And
 	Elias D.~Striatum \\
 	Department of Electrical Engineering\\
@@ -168,7 +168,17 @@ The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is
 \end{itemize}
 
 
-\bibliographystyle{unsrtnat}
-\bibliography{references}
+\newpage
+
+
+\addcontentsline{toc}{section}{Список используемой литературы}
+
+%далее сам список используевой литературы
+\begin{thebibliography}{}
+	\bibitem{litlink1} O.V. Senko, A.A. Dokukin, N.N. Kiselyova, V.A. Dudarev
+	, Yu.O. Kuznetsova - "New Two-Level Ensemble Method and Its Application to
+	Chemical Compounds Properties Prediction"
+	\bibitem{litlink2} Liu, Y., Wang, Y., Zhang, J. (2012). New Machine Learning Algorithm: Random Forest. In: Liu, B., Ma, M., Chang, J. (eds) Information Computing and Applications. ICICA 2012. Lecture Notes in Computer Science, vol 7473. Springer, Berlin, Heidelberg.
+\end{thebibliography}
 
 \end{document}
