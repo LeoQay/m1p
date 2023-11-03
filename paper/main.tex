@@ -59,7 +59,7 @@
 \end{abstract}
 
 
-\keywords{Случайный лес \and Решающие деревья}
+\keywords{Machine Learning \and Multilevel Machine Learning Systems \and Regression Modeling \and Inorganic Compounds Physical Properties Prediction.}
 
 \section{Introduction}
 
@@ -84,7 +84,7 @@
 качественным.
 В данной работе будет детально рассмотрено построение дерева на
 очередном шаге по вышеописанному методу и для тестирования будет
-исследовано его применение на данных о химических веществах.
+исследовано его применение на данных о химических веществах. \citep{bibref1}, \citep{bibref2}.
 
 \section{Problem statement}
 \label{sec:headings}
@@ -135,8 +135,9 @@ $$ \Phi(\tilde{S}, T) = \Sigma_{j=1}^{m} \{ \gamma_1 [T(x_j) - y_j]^2 + \gamma_2
 \end{itemize}
 
 
+
+
 \section{Эксперименты}
-\label{sec:headings}
 
 \subsection{Описание данных}
 
@@ -188,7 +189,6 @@ $$ \Phi(\tilde{S}, T) = \Sigma_{j=1}^{m} \{ \gamma_1 [T(x_j) - y_j]^2 + \gamma_2
 На рис. \ref{ris:image2} и рис. \ref{ris:image3} изображена степень корреляции каждого из признаков с целевой переменной в порядке возрастания. Из данных графиков можно сделать вывод, что признаки имеют высокую степень корреляции с целевой переменной и не являются случайными. К тому же можно заметить, что графики для двух датасетов имеют большое сходство между собой, а значит данные принадлежат одному распределению. Дальнейшее исследование проведем над одним из датасетов.
 
 
-\vspace{1.3cm}
 
 \subsection{Результаты экспериментов}
 
@@ -208,7 +208,7 @@ $$ \Phi(\tilde{S}, T) = \Sigma_{j=1}^{m} \{ \gamma_1 [T(x_j) - y_j]^2 + \gamma_2
 		\end{minipage}
 	\end{center}
 	
-	\caption{График зависимости значения функционала от глубины дерева для датасета task1.xls при разных значениях параметра $min\_samples\_split$, и при $\gamma_1 = 0.8$, $\gamma_2 = 0.2$, $\mu = 0.2$. }
+	\caption{График зависимости значения функционала от глубины дерева для датасета 1 при разных значениях параметра $min\_samples\_split$, и при $\gamma_1 = 0.8$, $\gamma_2 = 0.2$, $\mu = 0.2$. }
 	\label{ris:image4}
 \end{figure}
 
@@ -220,7 +220,7 @@ $$ \Phi(\tilde{S}, T) = \Sigma_{j=1}^{m} \{ \gamma_1 [T(x_j) - y_j]^2 + \gamma_2
 		\end{minipage}
 	\end{center}
 	
-	\caption{График зависимости значения функционала от глубины дерева для датасета task1.xls при разных значениях параметра $min\_samples\_split$, и при $\gamma_1 = 0.2$, $\gamma_2 = 0.8$, $\mu = 0.2$. }
+	\caption{График зависимости значения функционала от глубины дерева для датасета 1 при разных значениях параметра $min\_samples\_split$, и при $\gamma_1 = 0.2$, $\gamma_2 = 0.8$, $\mu = 0.2$. }
 	\label{ris:image5}
 \end{figure}
 
@@ -253,7 +253,7 @@ $$ \Phi(\tilde{S}, T) = \Sigma_{j=1}^{m} \{ \gamma_1 [T(x_j) - y_j]^2 + \gamma_2
 		\end{minipage}
 	\end{center}
 	
-	\caption{График зависимости значения функционала от глубины дерева для датасета task1.xls при разных значениях параметра $\mu$, и при $\gamma_1 = 0.8$, $\gamma_2 = 0.2$, $min\_samples\_split = 2$. }
+	\caption{График зависимости значения функционала от глубины дерева для датасета 1 при разных значениях параметра $\mu$, и при $\gamma_1 = 0.8$, $\gamma_2 = 0.2$, $min\_samples\_split = 2$. }
 	\label{ris:image7}
 \end{figure}
 
@@ -265,14 +265,8 @@ $$ \Phi(\tilde{S}, T) = \Sigma_{j=1}^{m} \{ \gamma_1 [T(x_j) - y_j]^2 + \gamma_2
 \newpage
 
 
-\addcontentsline{toc}{section}{Список используемой литературы}
+\bibliographystyle{unsrtnat}
+\bibliography{references}
 
-%далее сам список используевой литературы
-\begin{thebibliography}{}
-	\bibitem{litlink1} O.V. Senko, A.A. Dokukin, N.N. Kiselyova, V.A. Dudarev
-	, Yu.O. Kuznetsova - "New Two-Level Ensemble Method and Its Application to
-	Chemical Compounds Properties Prediction"
-	\bibitem{litlink2} Liu, Y., Wang, Y., Zhang, J. (2012). New Machine Learning Algorithm: Random Forest. In: Liu, B., Ma, M., Chang, J. (eds) Information Computing and Applications. ICICA 2012. Lecture Notes in Computer Science, vol 7473. Springer, Berlin, Heidelberg.
-\end{thebibliography}
 
 \end{document}
