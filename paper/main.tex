@@ -135,77 +135,131 @@ $$ \Phi(\tilde{S}, T) = \Sigma_{j=1}^{m} \{ \gamma_1 [T(x_j) - y_j]^2 + \gamma_2
 \end{itemize}
 
 
-\vspace{1.3cm}
-
-\section{Headings: first level}
+\section{Эксперименты}
 \label{sec:headings}
 
-\lipsum[4] See Section \ref{sec:headings}.
+\subsection{Описание данных}
 
-\subsection{Headings: second level}
-\lipsum[5]
-\begin{equation}
-	\xi _{ij}(t)=P(x_{t}=i,x_{t+1}=j|y,v,w;\theta)= {\frac {\alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}{\sum _{i=1}^{N} \sum _{j=1}^{N} \alpha _{i}(t)a^{w_t}_{ij}\beta _{j}(t+1)b^{v_{t+1}}_{j}(y_{t+1})}}
-\end{equation}
+Для тестирования реализации дерева было использовано два набора данных с разным множеством признаков. Данные состоят из двух разных датасетов химических соединений.
 
-\subsubsection{Headings: third level}
-\lipsum[6]
+Объектами являются некоторые химические соединения, каждый из которых описан набором вещественных значений. Целевой переменной является температура плавление химического соединения в Кельвинах.
 
-\paragraph{Paragraph}
-\lipsum[7]
+Проведем некоторый анализ предоставленных данных. Первый датасет имеет 451 объект и 98 признаков, а второй 431 объект и 86 признаков. Данные были разделены на тренировочную и тестовую выборки в соотношении 7 к 3.
 
+\begin{figure}[h]
+	\begin{center}
+		\begin{minipage}[h]{0.95\linewidth}
+			{\includegraphics[width=1.0\linewidth]{../figures/dists.pdf}}	
+		\end{minipage}
+	\end{center}
+	
+	\caption{График распределения кол-ва признаков в зависимости от кол-ва уникальных значений. }
+	
+	\label{ris:image1}
+	
+\end{figure}
 
-
-\section{Examples of citations, figures, tables, references}
-\label{sec:others}
-
-\subsection{Citations}
-Citations use \verb+natbib+. The documentation may be found at
-\begin{center}
-	\url{http://mirrors.ctan.org/macros/latex/contrib/natbib/natnotes.pdf}
-\end{center}
-
-Here is an example usage of the two main commands (\verb+citet+ and \verb+citep+): Some people thought a thing \citep{kour2014real, hadash2018estimate} but other people thought something else \citep{kour2014fast}. Many people have speculated that if we knew exactly why \citet{kour2014fast} thought this\dots
-
-\subsection{Figures}
-\lipsum[10]
-See Figure \ref{fig:fig1}. Here is how you add footnotes. \footnote{Sample of the first footnote.}
-\lipsum[11]
+Из данных графиков на рис. \ref{ris:image1} можно заметить, что у большей части признаков в датасете малое число уникальных значений. Из этого можно сделать вывод, что признаки можно интерпретировать как упорядоченные категориальные, как раз для таких данных хорошо подходит модель решающего дерева.
 
 
-
-\subsection{Tables}
-See awesome Table~\ref{tab:table}.
-
-The documentation for \verb+booktabs+ (`Publication quality tables in LaTeX') is available from:
-\begin{center}
-	\url{https://www.ctan.org/pkg/booktabs}
-\end{center}
-
-
-\begin{table}
-	\caption{Sample table title}
+\begin{figure}[h]
 	\centering
-	\begin{tabular}{lll}
-		\toprule
-		\multicolumn{2}{c}{Part}                   \\
-		\cmidrule(r){1-2}
-		Name     & Description     & Size ($\mu$m) \\
-		\midrule
-		Dendrite & Input terminal  & $\sim$100     \\
-		Axon     & Output terminal & $\sim$10      \\
-		Soma     & Cell body       & up to $10^6$  \\
-		\bottomrule
-	\end{tabular}
-	\label{tab:table}
-\end{table}
+	
+	\begin{minipage}[h]{\linewidth}
+		{\includegraphics[width=1.0\linewidth]{../figures/corr_task1.pdf}}	
+	\end{minipage}
+	
+	\caption{График корреляции Пирсона признаков с целевой переменной из датасета 1 }
+	\label{ris:image2}
+\end{figure}
 
-\subsection{Lists}
-\begin{itemize}
-	\item Lorem ipsum dolor sit amet
-	\item consectetur adipiscing elit.
-	\item Aliquam dignissim blandit est, in dictum tortor gravida eget. In ac rutrum magna.
-\end{itemize}
+\begin{figure}[h]
+	\centering
+	
+	\begin{minipage}[h]{\linewidth}
+		{\includegraphics[width=1.0\linewidth]{../figures/corr_task36.pdf}}	
+	\end{minipage}
+	
+	
+	\caption{График корреляции Пирсона признаков с целевой переменной из датасета task36.csv }
+	\label{ris:image3}
+\end{figure}
+
+На рис. \ref{ris:image2} и рис. \ref{ris:image3} изображена степень корреляции каждого из признаков с целевой переменной в порядке возрастания. Из данных графиков можно сделать вывод, что признаки имеют высокую степень корреляции с целевой переменной и не являются случайными. К тому же можно заметить, что графики для двух датасетов имеют большое сходство между собой, а значит данные принадлежат одному распределению. Дальнейшее исследование проведем над одним из датасетов.
+
+
+\vspace{1.3cm}
+
+\subsection{Результаты экспериментов}
+
+Были проведены эксперименты над реализацией дерева решений для задачи регрессии, оптимизирующего рассматриваемый функционал.
+
+Для тестирования и исследования в качестве модели G1 (к зависимости которой дерево должно приближаться) был взят градиентный бустинг, а в качестве модели G2 (от зависимости которой необходимо удаляться) случайный лес. Параметры данных моделей были подобраны на кросс-валидации, где использовалась стандартная метрика MSE.
+
+Был произведен ряд экспериментов с различными значениями гиперпараметров модели, такими как максимальная глубина дерева, минимальное число объектов в узле для разбиения, а также перебирались разные значения параметров целевого функционала: $\gamma_1, \gamma_2, \mu$.
+
+На рис. \ref{ris:image4} и рис. \ref{ris:image5} изображено поведение рассматриваемого функционала в зависимости от глубины дерева. На первом графике в целевом функционале преобладают истинные значения таргета, а на втором преобладают значения, предсказанные градиентным бустингом. 
+
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{minipage}[h]{0.95\linewidth}
+			{\includegraphics[width=1.0\linewidth]{../figures/max_depth_task1_gamma_08_mu_02.pdf}}	
+		\end{minipage}
+	\end{center}
+	
+	\caption{График зависимости значения функционала от глубины дерева для датасета task1.xls при разных значениях параметра $min\_samples\_split$, и при $\gamma_1 = 0.8$, $\gamma_2 = 0.2$, $\mu = 0.2$. }
+	\label{ris:image4}
+\end{figure}
+
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{minipage}[h]{0.95\linewidth}
+			{\includegraphics[width=1.0\linewidth]{../figures/max_depth_task1_gamma_02_mu_02.pdf}}	
+		\end{minipage}
+	\end{center}
+	
+	\caption{График зависимости значения функционала от глубины дерева для датасета task1.xls при разных значениях параметра $min\_samples\_split$, и при $\gamma_1 = 0.2$, $\gamma_2 = 0.8$, $\mu = 0.2$. }
+	\label{ris:image5}
+\end{figure}
+
+
+На рис. \ref{ris:image4} наблюдается уменьшение значения функционала при уменьшении гиперпараметра $min\_samples\_split$ на тренировочной и тестовой выборках с последующим установлением плато, что связано с достижением предельного значения глубины, после которого во всех узлах минимальное число объектов. При глубине дерева 8 заметен локальный минимум на тестовой выборке, после чего функционал существенно не уменьшался.
+
+
+На рис. \ref{ris:image5}, где в функционале преобладают предсказания градиентного бустинга, можно заметить, что функционал на тестовой выборке убывает монотоннно, как и на тренировочной выборке. Такое поведение может быть, связано с тем, что для решающего дерева предсказывать ответы градиентного бустинга (основанного на деревьях) проще, чем истинную зависимость.
+
+
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{minipage}[h]{1\linewidth}
+			{\includegraphics[width=1.0\linewidth]{../figures/task1_common_mse.pdf}}	
+		\end{minipage}
+	\end{center}
+	
+	\caption{График зависимости значения MSE от глубины дерева (деревья обучались с метрикой MSE). }
+	\label{ris:image6}
+\end{figure}
+
+Рассмотрим разницу между поведением исследуемого функционала и стандартного MSE при увеличении максимальной глубины дерева. На рис. \ref{ris:image6} изображен график зависимости метрики MSE от максимальной глубины дерева. На тренировочной выборке MSE монотонно убывает с ростом глубины, что похоже на поведение рассматриваемого функционала, но на тестовой выборке наблюдаются колебания. Можно сделать вывод, что исследуемый функционал оптимизируется стабильнее, чем MSE.
+
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{minipage}[h]{1.0\linewidth}
+			{\includegraphics[width=1.0\linewidth]{../figures/max_depth_task1_gamma_08_min_2.pdf}}	
+		\end{minipage}
+	\end{center}
+	
+	\caption{График зависимости значения функционала от глубины дерева для датасета task1.xls при разных значениях параметра $\mu$, и при $\gamma_1 = 0.8$, $\gamma_2 = 0.2$, $min\_samples\_split = 2$. }
+	\label{ris:image7}
+\end{figure}
+
+Рассмотрим поведение функционала при различных значениях параметра $\mu$ (рис. \ref{ris:image7}). Из график следует, что значение функционала на тренировочной выборке уменьшается при увеличении $\mu$, что согласуется с формулой функционала. Но противоположное наблюдается на тестовой выборке, где при увеличении параметра $\mu$ увеличиваются и значения функционала. Из этого можно сделать вывод, что сильное отдаление от ответов решающего леса ухудшает качество предсказания.
+
+
 
 
 \newpage
